@@ -36,20 +36,20 @@ st.markdown("### 👥 Meet Our Team")
 # Straightforward row-by-row layout
 with st.container(border=True):
     st.markdown("### 👤 Chua Bi Yun")
-    st.markdown("**Role:** Data Architect | **Matric No:** 25005610")
+    st.markdown("**Role:** Data Architect  |  **Matric No:** 25005610")
 
 with st.container(border=True):
     st.markdown("### 👤 Phong Xiao Wei")
-    st.markdown("**Role:** Algorithm Specialist | **Matric No:** 25005900")
+    st.markdown("**Role:** Algorithm Specialist  |  **Matric No:** 25005900")
 
 with st.container(border=True):
     st.markdown("### 👤 Joyce Wong Tze Eng")
-    st.markdown("**Role:** ML Engineer | **Matric No:** 25005859")
+    st.markdown("**Role:** ML Engineer  |  **Matric No:** 25005859")
 
 with st.container(border=True):
     st.markdown("### 👤 Choo Kah Lok")
-    st.markdown("**Role:** ML Engineer | **Matric No:** 25005750")
+    st.markdown("**Role:** ML Engineer  |  **Matric No:** 25005750")
 
 with st.container(border=True):
     st.markdown("### 👤 Chai Xin Tong")
-    st.markdown("**Role:** Visual Analyst | **Matric No:** 25005524")
+    st.markdown("**Role:** Visual Analyst  |  **Matric No:** 25005524")
