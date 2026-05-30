@@ -12,7 +12,7 @@ st.subheader("Machine Learning Project (WIA1006)")
 
 st.markdown("""
 ### 📖 Project Overview
-In this era, modern relationships highly dependence on digital interactions. 
+In this era, modern relationships highly depend on digital interactions. 
 This application uses Machine Learning Models to translate behaviors such as app usage patterns, messaging habits, 
 and swipe behaviors into predictable relationship trajectories.
 
@@ -33,35 +33,35 @@ with col_link2:
 st.markdown("---")
 st.markdown("### 👥 Meet Our Team")
 
-# Adjust columns depending on your team size (e.g., 3 or 4)
+# Create 5 columns for the 5 groupmates
 col1, col2, col3, col4, col5 = st.columns(5)
 
 with col1:
-    st.image("https://www.vecteezy.com/free-png/woman-avatar", width=120) # Dummy avatar
-    st.markdown("**Chua Bi Yun**")
-    st.caption("Data Architect")
-    st.text("Matric No: 25005610")
+    with st.container(border=True):
+        st.markdown("👤 **Chua Bi Yun**")
+        st.caption("Data Architect")
+        st.text("Matric No:\n25005610")
 
 with col2:
-    st.image("https://www.vecteezy.com/free-png/woman-avatar", width=120)
-    st.markdown("**Phong Xiao Wei**")
-    st.caption("Algorithm Specialist")
-    st.text("Matric No: 25005900")
+    with st.container(border=True):
+        st.markdown("👤 **Phong Xiao Wei**")
+        st.caption("Algorithm Specialist")
+        st.text("Matric No:\n25005900")
 
 with col3:
-    st.image("https://www.vecteezy.com/free-png/woman-avatar", width=120)
-    st.markdown("**Joyce Wong Tze Eng**")
-    st.caption("ML Engineer")
-    st.text("Matric No: 25005859")
+    with st.container(border=True):
+        st.markdown("👤 **Joyce Wong Tze Eng**")
+        st.caption("ML Engineer")
+        st.text("Matric No:\n25005859")
 
 with col4:
-    st.image("https://pngtree.com/freepng/creative-boys-avatar_17327785.html", width=120)
-    st.markdown("**Choo Kah Lok**")
-    st.caption("ML Engineer")
-    st.text("Matric No: 25005750")
+    with st.container(border=True):
+        st.markdown("👤 **Choo Kah Lok**")
+        st.caption("ML Engineer")
+        st.text("Matric No:\n25005750")
 
 with col5:
-    st.image("https://www.vecteezy.com/free-png/woman-avatar", width=120)
-    st.markdown("**Chai Xin Tong**")
-    st.caption("Visual Analyst")
-    st.text("Matric No: 25005524")
+    with st.container(border=True):
+        st.markdown("👤 **Chai Xin Tong**")
+        st.caption("Visual Analyst")
+        st.text("Matric No:\n25005524")
