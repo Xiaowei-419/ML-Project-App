@@ -37,31 +37,31 @@ st.markdown("### 👥 Meet Our Team")
 col1, col2, col3, col4, col5 = st.columns(5)
 
 with col1:
-    st.image("https://cdn-icons-png.flaticon.com/512/4140/4140037.png", width=120) # Dummy avatar
+    st.image("https://www.vecteezy.com/free-png/woman-avatar", width=120) # Dummy avatar
     st.markdown("**Chua Bi Yun**")
     st.caption("Data Architect")
     st.text("Matric No: 25005610")
 
 with col2:
-    st.image("https://cdn-icons-png.flaticon.com/512/4140/4140048.png", width=120)
+    st.image("https://www.vecteezy.com/free-png/woman-avatar", width=120)
     st.markdown("**Phong Xiao Wei**")
     st.caption("Algorithm Specialist")
     st.text("Matric No: 25005900")
 
 with col3:
-    st.image("https://cdn-icons-png.flaticon.com/512/4139/4139981.png", width=120)
+    st.image("https://www.vecteezy.com/free-png/woman-avatar", width=120)
     st.markdown("**Joyce Wong Tze Eng**")
     st.caption("ML Engineer")
     st.text("Matric No: 25005859")
 
 with col4:
-    st.image("https://cdn-icons-png.flaticon.com/512/4139/4139981.png", width=120)
+    st.image("https://pngtree.com/freepng/creative-boys-avatar_17327785.html", width=120)
     st.markdown("**Choo Kah Lok**")
     st.caption("ML Engineer")
     st.text("Matric No: 25005750")
 
 with col5:
-    st.image("https://cdn-icons-png.flaticon.com/512/4139/4139981.png", width=120)
+    st.image("https://www.vecteezy.com/free-png/woman-avatar", width=120)
     st.markdown("**Chai Xin Tong**")
     st.caption("Visual Analyst")
     st.text("Matric No: 25005524")
