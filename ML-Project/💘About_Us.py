@@ -33,35 +33,41 @@ with col_link2:
 st.markdown("---")
 st.markdown("### 👥 Meet Our Team")
 
-# Create 5 columns for the 5 groupmates
-col1, col2, col3, col4, col5 = st.columns(5)
+# --- ROW 1: First 3 Team Members ---
+row1_col1, row1_col2, row1_col3 = st.columns(3)
 
-with col1:
+with row1_col1:
     with st.container(border=True):
-        st.markdown("👤 **Chua Bi Yun**")
-        st.caption("Data Architect")
-        st.text("Matric No:\n25005610")
+        st.markdown("### 👤 Chua Bi Yun")
+        st.markdown("**Role:** Data Architect")
+        st.caption("Matric No: 25005610")
 
-with col2:
+with row1_col2:
     with st.container(border=True):
-        st.markdown("👤 **Phong Xiao Wei**")
-        st.caption("Algorithm Specialist")
-        st.text("Matric No:\n25005900")
+        st.markdown("### 👤 Phong Xiao Wei")
+        st.markdown("**Role:** Algorithm Specialist")
+        st.caption("Matric No: 25005900")
 
-with col3:
+with row1_col3:
     with st.container(border=True):
-        st.markdown("👤 **Joyce Wong Tze Eng**")
-        st.caption("ML Engineer")
-        st.text("Matric No:\n25005859")
+        st.markdown("### 👤 Joyce Wong Tze Eng")
+        st.markdown("**Role:** ML Engineer")
+        st.caption("Matric No: 25005859")
 
-with col4:
-    with st.container(border=True):
-        st.markdown("👤 **Choo Kah Lok**")
-        st.caption("ML Engineer")
-        st.text("Matric No:\n25005750")
+# Add a tiny visual spacing between rows
+st.markdown("")
 
-with col5:
+# --- ROW 2: Last 2 Team Members (Perfectly centered by using 4 columns and leaving outer ones empty) ---
+empty_left, row2_col1, row2_col2, empty_right = st.columns([0.5, 1, 1, 0.5])
+
+with row2_col1:
     with st.container(border=True):
-        st.markdown("👤 **Chai Xin Tong**")
-        st.caption("Visual Analyst")
-        st.text("Matric No:\n25005524")
+        st.markdown("### 👤 Choo Kah Lok")
+        st.markdown("**Role:** ML Engineer")
+        st.caption("Matric No: 25005750")
+
+with row2_col2:
+    with st.container(border=True):
+        st.markdown("### 👤 Chai Xin Tong")
+        st.markdown("**Role:** Visual Analyst")
+        st.caption("Matric No: 25005524")
