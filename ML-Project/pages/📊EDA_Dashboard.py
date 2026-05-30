@@ -10,7 +10,7 @@ st.title("📊 Exploratory Data Analysis Dashboard")
 @st.cache_data
 def load_data():
     # Reads your real processed CSV file directly from your root directory
-    df = pd.read_csv("dating_data_final_processed.csv")
+    df = pd.read_csv("https://drive.google.com/file/d/1oR32oFLa1yX4R-jx3x0A0b9KTurT_Sa5/view?usp=sharing")
     return df
 
 # Load the real dataset
