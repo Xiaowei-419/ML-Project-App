@@ -9,8 +9,11 @@ st.title("📊 Exploratory Data Analysis Dashboard")
 
 @st.cache_data
 def load_data():
-    # Reads your real processed CSV file directly from your root directory
-    df = pd.read_csv("https://drive.google.com/file/d/1oR32oFLa1yX4R-jx3x0A0b9KTurT_Sa5/view?usp=sharing")
+    # This URL forces Google Drive to deliver the raw CSV data directly to pandas
+    direct_csv_url = "https://drive.google.com/uc?export=download&id=1oR32oFLa1yX4R-jx3x0A0b9KTurT_Sa5"
+    
+    # Reads your real processed CSV file directly from your Google Drive link
+    df = pd.read_csv(direct_csv_url)
     return df
 
 # Load the real dataset
