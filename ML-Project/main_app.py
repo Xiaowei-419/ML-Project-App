@@ -39,29 +39,29 @@ col1, col2, col3, col4, col5 = st.columns(5)
 with col1:
     st.image("https://cdn-icons-png.flaticon.com/512/4140/4140037.png", width=120) # Dummy avatar
     st.markdown("**Chua Bi Yun**")
-    st.caption("Role: Data Architect")
+    st.caption("Data Architect")
     st.text("Matric No: 25005610")
 
 with col2:
     st.image("https://cdn-icons-png.flaticon.com/512/4140/4140048.png", width=120)
     st.markdown("**Phong Xiao Wei**")
-    st.caption("Role: The Algorithm Specialist")
+    st.caption("Algorithm Specialist")
     st.text("Matric No: 25005900")
 
 with col3:
     st.image("https://cdn-icons-png.flaticon.com/512/4139/4139981.png", width=120)
     st.markdown("**Joyce Wong Tze Eng**")
-    st.caption("Role: ML Engineer")
+    st.caption("ML Engineer")
     st.text("Matric No: 25005859")
 
 with col4:
     st.image("https://cdn-icons-png.flaticon.com/512/4139/4139981.png", width=120)
     st.markdown("**Choo Kah Lok**")
-    st.caption("Role: ML Engineer")
+    st.caption("ML Engineer")
     st.text("Matric No: 25005750")
 
 with col5:
     st.image("https://cdn-icons-png.flaticon.com/512/4139/4139981.png", width=120)
     st.markdown("**Chai Xin Tong**")
-    st.caption("Role: Visual Analyst")
+    st.caption("Visual Analyst")
     st.text("Matric No: 25005524")
