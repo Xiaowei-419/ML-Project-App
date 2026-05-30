@@ -12,7 +12,7 @@ st.subheader("Machine Learning Project (WIA1006)")
 
 st.markdown("""
 ### 📖 Project Overview
-In this digital era, modern relationships highly dependence on digital interactions. 
+In this era, modern relationships highly dependence on digital interactions. 
 This application uses Machine Learning Models to translate behaviors such as app usage patterns, messaging habits, 
 and swipe behaviors into predictable relationship trajectories.
 
