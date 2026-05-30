@@ -33,41 +33,23 @@ with col_link2:
 st.markdown("---")
 st.markdown("### 👥 Meet Our Team")
 
-# --- ROW 1: First 3 Team Members ---
-row1_col1, row1_col2, row1_col3 = st.columns(3)
+# Straightforward row-by-row layout
+with st.container(border=True):
+    st.markdown("### 👤 Chua Bi Yun")
+    st.markdown("**Role:** Data Architect | **Matric No:** 25005610")
 
-with row1_col1:
-    with st.container(border=True):
-        st.markdown("### 👤 Chua Bi Yun")
-        st.markdown("**Role:** Data Architect")
-        st.caption("Matric No: 25005610")
+with st.container(border=True):
+    st.markdown("### 👤 Phong Xiao Wei")
+    st.markdown("**Role:** Algorithm Specialist | **Matric No:** 25005900")
 
-with row1_col2:
-    with st.container(border=True):
-        st.markdown("### 👤 Phong Xiao Wei")
-        st.markdown("**Role:** Algorithm Specialist")
-        st.caption("Matric No: 25005900")
+with st.container(border=True):
+    st.markdown("### 👤 Joyce Wong Tze Eng")
+    st.markdown("**Role:** ML Engineer | **Matric No:** 25005859")
 
-with row1_col3:
-    with st.container(border=True):
-        st.markdown("### 👤 Joyce Wong Tze Eng")
-        st.markdown("**Role:** ML Engineer")
-        st.caption("Matric No: 25005859")
+with st.container(border=True):
+    st.markdown("### 👤 Choo Kah Lok")
+    st.markdown("**Role:** ML Engineer | **Matric No:** 25005750")
 
-# Add a tiny visual spacing between rows
-st.markdown("")
-
-# --- ROW 2: Last 2 Team Members (Perfectly centered by using 4 columns and leaving outer ones empty) ---
-empty_left, row2_col1, row2_col2, empty_right = st.columns([0.5, 1, 1, 0.5])
-
-with row2_col1:
-    with st.container(border=True):
-        st.markdown("### 👤 Choo Kah Lok")
-        st.markdown("**Role:** ML Engineer")
-        st.caption("Matric No: 25005750")
-
-with row2_col2:
-    with st.container(border=True):
-        st.markdown("### 👤 Chai Xin Tong")
-        st.markdown("**Role:** Visual Analyst")
-        st.caption("Matric No: 25005524")
+with st.container(border=True):
+    st.markdown("### 👤 Chai Xin Tong")
+    st.markdown("**Role:** Visual Analyst | **Matric No:** 25005524")
