@@ -38,7 +38,7 @@ col_left, col_right = st.columns([1, 2])
 
 with col_left:
     st.markdown("""
-    **Chua Bi Yun** **Phong Xiao Wei** **Joyce Wong Tze Eng** **Choo Kah Lok** **Chai Xin Tong** """)
+    **Chua Bi Yun**\n **Phong Xiao Wei**\n **Joyce Wong Tze Eng**\n **Choo Kah Lok**\n **Chai Xin Tong** """)
 
 with col_right:
     st.markdown("""
