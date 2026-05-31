@@ -80,33 +80,42 @@ try:
 
     st.markdown("---")
 
-    # --- STEP 3: INTERACTIVE COMPARISON CHART ---
-    if len(available_cols) >= 2:
-        st.markdown("### 🕵️‍♂️ Compare Two Dating Habits")
-        st.markdown("Pick any two dating habits below to see how they interact. Each dot is a real user profile, colored by their ultimate dating fate!")
+    # --- STEP 3: INTERACTIVE COMPARISON CHART (BOX PLOT REPLACEMENT) ---
+    if len(available_cols) >= 1:
+        st.markdown("### 🕵️‍♂️ Explore Behavior Ranges Across Outcomes")
+        st.markdown("Select a dating habit below to see its statistical distribution. This chart reveals the typical ranges and midpoints for each ultimate dating outcome.")
 
-        col_s1, col_s2 = st.columns(2)
-        with col_s1:
-            chosen_x_label = st.selectbox("Choose the first habit (X-Axis):", dropdown_labels, index=0)
-        with col_s2:
-            chosen_y_label = st.selectbox("Choose the second habit (Y-Axis):", dropdown_labels, index=min(1, len(dropdown_labels)-1))
+        # Single select box is much cleaner and less overwhelming for the user
+        chosen_habit_label = st.selectbox("Choose a dating habit to analyze:", dropdown_labels, index=0)
 
-        # Get the real technical database column names from the friendly labels chosen
-        real_x = [k for k, v in friendly_names.items() if v == chosen_x_label][0]
-        real_y = [k for k, v in friendly_names.items() if v == chosen_y_label][0]
+        # Map the friendly label back to the real technical database column name
+        real_habit = [k for k, v in friendly_names.items() if v == chosen_habit_label][0]
 
-        # Build an interactive scatter plot
-        fig_scatter = px.scatter(
+        # Build an elegant, highly interpretable Box Plot
+        fig_box = px.box(
             df, 
-            x=real_x, 
-            y=real_y, 
+            x='Dating Outcome', 
+            y=real_habit, 
             color='Dating Outcome',
-            labels={real_x: chosen_x_label, real_y: chosen_y_label},
-            title=f"How '{chosen_x_label}' relates to '{chosen_y_label}'",
-            color_discrete_map={'Mutual Match 👩‍❤️‍👨': '#2ecc71', 'Ghosted 👻': '#f1c40f', 'Catfished 🕵️‍♂️': '#e74c3c'},
-            opacity=0.7
+            title=f"Distribution Range of '{chosen_habit_label}' by Dating Outcome",
+            color_discrete_map={
+                'Mutual Match 👩‍❤️‍👨': '#2ecc71', 
+                'Ghosted 👻': '#f1c40f', 
+                'Catfished 🕵️‍♂️': '#e74c3c'
+            },
+            points=False, # Hides chaotic outlier dots so the boxes stay beautifully clean
+            notched=True   # Adds a narrowing at the median line to help visually pinpoint the average
         )
-        st.plotly_chart(fig_scatter, use_container_width=True)
+
+        # Style the layout adjustments to make it look professional
+        fig_box.update_layout(
+            xaxis_title="Dating Outcome",
+            yaxis_title=chosen_habit_label,
+            showlegend=False,
+            height=450
+        )
+        
+        st.plotly_chart(fig_box, use_container_width=True)
 
     st.markdown("---")
 
@@ -123,6 +132,63 @@ try:
             color_discrete_map={'Mutual Match 👩‍❤️‍👨': '#2ecc71', 'Ghosted 👻': '#f1c40f', 'Catfished 🕵️‍♂️': '#e74c3c'}
         )
         st.plotly_chart(fig_pie, use_container_width=True)
+    
+    st.markdown("---")
+
+    # --- STEP 4.5: BEHAVIORAL TIER DISTRIBUTION BREAKDOWN ---
+    if 'Dating Outcome' in df.columns and len(available_cols) >= 1:
+        st.markdown("### 📊 Behavioral Tier Distribution Analysis")
+        st.markdown("See the shifting ratio of relationship outcomes across different operational levels of user engagement.")
+
+        # Let user select which continuous trend line to discretize
+        tier_habit_label = st.selectbox("Select a habit to group into behavioral tiers:", dropdown_labels, index=min(1, len(dropdown_labels)-1), key="tier_choice")
+        real_tier_habit = [k for k, v in friendly_names.items() if v == tier_habit_label][0]
+
+        # Clone a temporary dataframe subset safely to apply quick binning operations
+        df_tier = df[[real_tier_habit, 'Dating Outcome']].copy()
+
+        # Dynamic pd.qcut grouping parameters to split any feature into balanced tiers
+        try:
+            df_tier['Activity Tier'] = pd.qcut(
+                df_tier[real_tier_habit], 
+                q=3, 
+                labels=["Low Level Focus", "Moderate Level Focus", "High Level Focus"],
+                duplicates='drop'
+            )
+        except Exception:
+            # Fallback if variable math does not allow continuous quantiles nicely
+            df_tier['Activity Tier'] = pd.cut(
+                df_tier[real_tier_habit], 
+                bins=3, 
+                labels=["Low Level Focus", "Moderate Level Focus", "High Level Focus"]
+            )
+
+        # Aggregate counts to compile precise stacked bar distributions
+        df_counts = df_tier.groupby(['Activity Tier', 'Dating Outcome'], observed=False).size().reset_index(name='Total Users')
+
+        # Generate a beautiful 100% relative stacked percentage distribution graph
+        fig_stacked = px.bar(
+            df_counts,
+            x="Activity Tier",
+            y="Total Users",
+            color="Dating Outcome",
+            title=f"Ratio Breakdown of Outcomes Based on '{tier_habit_label}' Tiers",
+            color_discrete_map={
+                'Mutual Match 👩‍❤️‍👨': '#2ecc71', 
+                'Ghosted 👻': '#f1c40f', 
+                'Catfished 🕵️‍♂️': '#e74c3c'
+            },
+            barmode="textual_none", # Kept clean
+        )
+
+        # Update layouts to stretch seamlessly to 100% capacity grid bounds
+        fig_stacked.update_layout(
+            yaxis_title="Volume Spread of App Users",
+            xaxis_title="Engineered Activity Thresholds",
+            height=450
+        )
+
+        st.plotly_chart(fig_stacked, use_container_width=True)
 
     # --- STEP 5: CLEAN DATA SHEET LOOKER ---
     st.markdown("---")
