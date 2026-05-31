@@ -2,7 +2,8 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-st.set_page_config(page_title="AI Insights", page_icon="🕵️‍♂️", layout="wide")
+# REMOVED/COMMENTED OUT TO PREVENT MULTI-PAGE CONFIG CRASHES:
+# st.set_page_config(page_title="AI Insights", page_icon="🕵️‍♂️", layout="wide")
 
 st.title("🕵️‍♂️ The AI Detective: How the Algorithm Thinks")
 st.markdown("""
@@ -45,7 +46,6 @@ fig_importance = px.bar(
     y="Your App Behaviors",
     orientation="h",
     color="AI Classification Impact",
-    # Green for good protective factors, Orange/Red for risks
     color_discrete_map={
         "🟢 Strong Protection Factor": "#2ecc71",
         "🟢 Protects Against Risk": "#27ae60",
@@ -72,7 +72,6 @@ sim_col1, sim_col2 = st.columns([1, 1.2])
 with sim_col1:
     with st.container(border=True):
         st.markdown("#### ⚙️ Profile Setup")
-        # Simplified descriptive sliders instead of math coordinates
         app_activity = st.select_slider(
             "⏱️ Daily Screen Time Level:",
             options=["Very Low (Few mins)", "Moderate (Under 1 hour)", "High (Multiple hours)"],
@@ -85,8 +84,8 @@ with sim_col1:
             value="Balanced Selector"
         )
 
-        # Map simple user friendly selections back to background rule values safely
-        score = 50 # Baseline middle zone
+        # Map simple friendly selections back to background rule values safely
+        score = 50 
         if app_activity == "Very Low (Few mins)": score -= 20
         if app_activity == "High (Multiple hours)": score += 25
         
@@ -96,7 +95,6 @@ with sim_col1:
 with sim_col2:
     st.markdown("#### 🤖 The AI's Verdict")
     
-    # Simple, high-impact conditional display cards
     if score > 60:
         st.error("### 🕵️‍♂️ Predicted Zone: High Risk (Catfish/Bot Pattern)")
         st.info("🚨 **AI Breakdown:** When a profile spends hours endlessly swiping right on every single person without pausing, the algorithm flags this as non-human or bot-like behavior. This blueprint is highly susceptible to fake accounts.")
