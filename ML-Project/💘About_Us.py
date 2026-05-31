@@ -35,7 +35,6 @@ st.markdown("### 👥 Our Team")
 
 # An invisible column structure that keeps all elements perfectly vertically aligned
 st.markdown("""
-| | | |
 | :--- | :--- | :--- |
 | **Chua Bi Yun** | :gray[Data Architect] | `25005610` |
 | **Phong Xiao Wei** | :gray[Algorithm Specialist] | `25005900` |
