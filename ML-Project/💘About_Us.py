@@ -33,15 +33,13 @@ with col_link2:
 st.markdown("---")
 st.markdown("### 👥 Our Team")
 
-# Minimalist vertical list with stacked details
+# An invisible column structure that keeps all elements perfectly vertically aligned
 st.markdown("""
-* **Chua Bi Yun** :gray[Data Architect] &nbsp;|&nbsp; `25005610`  
-
-* **Phong Xiao Wei** :gray[Algorithm Specialist] &nbsp;|&nbsp; `25005900`  
-
-* **Joyce Wong Tze Eng** :gray[ML Engineer] &nbsp;|&nbsp; `25005859`  
-
-* **Choo Kah Lok** :gray[ML Engineer] &nbsp;|&nbsp; `25005750`  
-
-* **Chai Xin Tong** :gray[Visual Analyst] &nbsp;|&nbsp; `25005524`  
+| | | |
+| :--- | :--- | :--- |
+| **Chua Bi Yun** | :gray[Data Architect] | `25005610` |
+| **Phong Xiao Wei** | :gray[Algorithm Specialist] | `25005900` |
+| **Joyce Wong Tze Eng** | :gray[ML Engineer] | `25005859` |
+| **Choo Kah Lok** | :gray[ML Engineer] | `25005750` |
+| **Chai Xin Tong** | :gray[Visual Analyst] | `25005524` |
 """)
