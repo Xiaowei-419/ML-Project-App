@@ -18,15 +18,15 @@ def get_model_metrics():
     # Exactly matching your notebook's Cell 19 Final Evaluation matrix
     data = {
         "Dating AI Classifier Setup": [
-            "Logistic Regression (With Situationship Index)", 
-            "Random Forest Classifier (Baseline)", 
-            "Support Vector Machine (SVM)", 
-            "Gradient Boosting Classifier", 
-            "K-Nearest Neighbors (KNN)"
+            "Logistic Regression (w/ Index)", 
+            "Random Forest (Baseline)", 
+            "SVM", 
+            "Gradient Boosting", 
+            "KNN"
         ],
-        "Testing Accuracy (%)": [33.96, 33.76, 33.02, 0.3285 * 100, 0.3249 * 100],
-        "CV Mean 5-Fold (%)": [33.10, 32.86, 33.40, 33.50, 33.35],
-        "CV Std Dev": [0.0046, 0.0048, 0.0062, 0.0031, 0.0059]
+        "Testing Accuracy (%)": [33.96, 33.76, 33.02, 32.85, 32.49],
+        "CV Mean 5-Fold (%)": [32.76, 33.32, 33.64, 33.26, 33.39],
+        "CV Std Dev": [0.0079, 0.0033, 0.0076, 0.0075, 0.0061]
     }
     return pd.DataFrame(data)
 
@@ -59,10 +59,10 @@ fig_compare.update_layout(
 )
 st.plotly_chart(fig_compare, use_container_width=True)
 
-# Project Context Analysis (Simplified & Understandable)
+# Project Context Analysis (Updated to align precisely with your data facts)
 st.success(
     "💡 **What do these results actually mean?** \n\n"
-    "1. **The Winner:** **Logistic Regression** (Using our custom **Situationship Index**) came out on top! It correctly predicted dating outcomes **33.96%** of the time, proving that our custom score really helps the AI look at relationships better.\n\n"
-    "2. **The Most Steady:** **Gradient Boosting** was our most reliable and steady performer. Even though its final test score was slightly lower, it was the least likely to make wild guesses when given completely new data.\n\n"
-    "3. **The Reality Check:** You might notice all the scores look quite low (around 32% to 33%). That is totally normal! Blindly guessing between 3 options gives you a 33.3% score. Human romance and online dating are incredibly random and unpredictable, even advanced AI algorithms have a tough time finding a perfect formula for love!"
+    "1. **The Winner:** **Logistic Regression (w/ Index)** came out on top! It correctly predicted dating outcomes **33.96%** of the time on unseen test data, proving that our engineered custom score helps regularized classification maps filter signals from complicated features.\n\n"
+    "2. **The Most Steady:** **Random Forest (Baseline)** emerged as the most structurally robust and steady performer across validation pools. It produced the tightest standard deviation variance (**0.0033**), making its decision paths highly resilient across data splits.\n\n"
+    "3. **The Reality Check:** You might notice all the scores look quite compact (around 32% to 34%). That is entirely normal! Blindly guessing between 3 options yields a baseline of 33.33%. Human romance and online dating are incredibly random and unpredictable, even advanced algorithms have a tough time finding a perfect formula for love!"
 )

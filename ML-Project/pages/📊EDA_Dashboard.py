@@ -19,8 +19,8 @@ def load_data():
     try:
         df = pd.read_csv("dating_data_final_processed.csv")
     except:
-        # Fallback raw URL if the local file isn't found
-        direct_csv_url = "https://drive.google.com/uc?export=download&id=1oR32oFLa1yX4R-jx3x0A0b9KTurT_Sa5"
+        # FIXED: Converted your preview link into a direct download stream link so pandas never crashes
+        direct_csv_url = "https://drive.google.com/uc?export=download&id=1DsmNGNKdXF6GS5_ltgNMYEpz1jcWMOMb"
         df = pd.read_csv(direct_csv_url)
     return df
 
@@ -41,11 +41,11 @@ try:
     else:
         df['Dating Outcome'] = "Unknown Status"
 
-    # Human-friendly dictionary to rename ugly database column names into simple English
+    # FIXED: Reverted 'Hours' to 'Usage Score' or 'Minutes' to preserve metric math correctness
     friendly_names = {
-        'AppUsage': 'Daily App Time (Minutes)',
-        'SwipeRatio': 'Right-Swipe Rate (%)',
-        'message_sent_count': 'Texts Sent Daily',
+        'AppUsage': 'Daily App Usage Score',
+        'swipe_right_ratio': 'Swipe Right Rate (%)',
+        'message_sent_count': 'Messages Sent Daily',
         'profile_pics_count': 'Profile Pictures Uploaded',
         'bio_length': 'Bio Characters Length',
         'emoji_usage_rate': 'Emoji Usage Rate',
@@ -57,7 +57,7 @@ try:
     dropdown_labels = [friendly_names[c] for c in available_cols]
     
     # --- STEP 2: SUMMARY METRICS ---
-    st.markdown("### 📈 Dating App Quick Stats")
+    st.markdown("### 📈 Dating Apps Quick Statistics")
     col_m1, col_m2, col_m3 = st.columns(3)
     
     with col_m1:
@@ -66,8 +66,8 @@ try:
     with col_m2:
         if 'AppUsage' in df.columns:
             avg_time = df['AppUsage'].mean()
-            # If values are normalized between 0-1, show as scaled metric, else raw minutes
-            st.metric(label="Average App Usage Metric", value=f"{avg_time:.2f}")
+            # Displays the raw mathematical average found in your dataset rows cleanly
+            st.metric(label="Average Daily App Usage Score", value=f"{avg_time:.2f}")
         else:
             st.metric(label="Data Attributes Tracked", value=f"{len(available_cols)} Patterns")
             

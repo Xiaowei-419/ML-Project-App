@@ -16,30 +16,37 @@ to forecast your ultimate dating app destiny!
 st.markdown("---")
 
 # --- STEP 1: USER BEHAVIOR CAPTURE FORM ---
-st.markdown("### 📝 Profile & App Behavior Entry")
+st.markdown("### 📝 User Profile & Behavior")
 
 form_col1, form_col2, form_col3 = st.columns(3)
 
 with form_col1:
-    app_usage_time = st.number_input("Daily App Usage (Hours):", min_value=1, max_value=300, value=45)
-    swipe_right_ratio = st.slider("Swipe Right Rate (%):", min_value=0, max_value=100, value=40) / 100.0
-    message_sent = st.number_input("Messages Sent Daily:", min_value=0, max_value=500, value=25)
+    # 🎚️ Sliders for App Time and Text Messages
+    app_usage_hours = st.slider("📱 Daily App Usage (Hours):", min_value=0.0, max_value=12.0, value=1.5, step=0.5)
+    swipe_right_ratio = st.slider("👉 Swipe Right (Accept) Rate (%):", min_value=0, max_value=100, value=40) / 100.0
+    message_sent = st.slider("💬 Messages Sent Daily:", min_value=0, max_value=300, value=25, step=5)
 
 with form_col2:
-    emoji_rate = st.slider("Emoji Usage Rate (%):", min_value=0, max_value=100, value=30) / 100.0
-    bio_length = st.number_input("Bio Length:", min_value=0, max_value=500, value=150)
-    profile_pics = st.number_input("Profile Pictures Uploaded:", min_value=1, max_value=10, value=4)
+    emoji_rate = st.slider("😂 Emoji Usage Rate (%):", min_value=0, max_value=100, value=30) / 100.0
+    
+    # 🎛️ Swapped Bio and Profile Pics into predefined sliding choices
+    bio_length = st.slider("✍️ Bio Length (Characters):", min_value=0, max_value=500, value=150, step=25)
+    profile_pics = st.slider("📸 Profile Pictures Uploaded:", min_value=1, max_value=10, value=4, step=1)
 
 with form_col3:
-    # Capturing input values to approximate Match Rates safely
-    likes_received = st.number_input("Approx. Likes Received Weekly:", min_value=0, max_value=1000, value=50)
-    matches_rec = st.number_input("Approx. Mutual Matches Weekly:", min_value=0, max_value=1000, value=10)
+    # 🎚️ Sliders for Weekly App Feedback activity
+    likes_received = st.slider("❤️ Likes Received Weekly:", min_value=0, max_value=500, value=50, step=10)
+    matches_rec = st.slider("🤝 Mutual Matches Weekly:", min_value=0, max_value=100, value=10, step=2)
     
-    # Ordinal Mapping Selectors aligned with your Kaggle script rules
-    area_type = st.selectbox("Current Area Setting:", ["Urban", "Rural"])
-    education_level = st.selectbox("Highest Education Level:", ["High School / Diploma", "Undergraduate Degree", "Postgraduate (Master's/PhD)"])
+    # 🔲 Clean drop-down selections
+    area_type = st.selectbox("📍 Current Area Setting:", ["Urban", "Rural"])
+    education_level = st.selectbox("🎓 Education Level:", ["High School / Diploma", "Undergraduate Degree", "Postgraduate (Master's/PhD)"])
 
-# Calculate intermediate inputs safely to feed into the index algorithm
+# --- AUTOMATIC DATA CONVERSIONS FOR CALCULATION ---
+# Converts hours back to minutes behind the scenes to keep your notebook formula safe
+app_usage_time = app_usage_hours * 60.0 
+
+# Re-calculate your intermediate metrics exactly like the notebook
 match_rate = np.clip((matches_rec / (likes_received + 1)), 0.0, 1.0)
 efficiency = np.clip((matches_rec / (app_usage_time + 0.1)), 0.0, 1.0)
 
@@ -50,38 +57,38 @@ encoded_edu = 1 if "High School" in education_level else (2 if "Undergraduate" i
 # --- STEP 2: RUN COMPUTATION ON BUTTON CLICK ---
 if st.button("🔮 Calculate Scores & Predict Destiny", use_container_width=True):
     
-    # 1. Compute Dynamic Innovation Layer Formula (0-100 score matching your code)
-    # The project bounds scale elements via standard weights:
+    # Scales app time dynamically against your notebook max threshold of 300 minutes
+    norm_app_time = min(app_usage_time / 300.0, 1.0)
+    
     situationship_score = 100 * (
-        0.35 * (app_usage_time / 300.0) + 
+        0.35 * norm_app_time + 
         0.25 * swipe_right_ratio + 
         0.25 * (1.0 - match_rate) + 
         0.15 * (1.0 - efficiency)
     )
     situationship_score = float(np.clip(situationship_score, 0.0, 100.0))
 
-    # 2. Mock Machine Learning Inference Engine 
-    # (Simulates your trained Logistic Regression/Random Forest logic based on calculated scores)
+    # Machine Learning Pipeline Emulation Paths (User-Friendly Version)
     if situationship_score > 60:
         predicted_class = "Catfished 🕵️‍♂️"
         probability = [0.15, 0.15, 0.70]
         verdict_color = "red"
-        advice = "⚠️ **High Alert:** Your score signals erratic behaviors or high interaction with inconsistent profiles. Verify your connections outside the app quickly!"
+        advice = "⚠️ **Warning!** Your app habits show a lot of time spent swiping or messaging with very few real matches to show for it. This usually hints at running into bots or fake profiles. Be cautious about who is on the other side of the screen!"
+        
     elif situationship_score < 38:
         predicted_class = "Mutual Match 👩‍❤️‍👨"
         probability = [0.10, 0.75, 0.15]
         verdict_color = "green"
-        advice = "🎉 **Excellent Status:** Your behavior pattern reflects balanced usage and healthy profile engagement. You're on standard pathing to real connections!"
+        advice = "🎉 **Green Light!** You have an amazing balance. You spend a reasonable amount of time on the app, send quality messages, and get great matches in return. You are on the perfect track to find a genuine connection!"
+        
     else:
         predicted_class = "Ghosted 👻"
         probability = [0.65, 0.20, 0.15]
         verdict_color = "orange"
-        advice = "💤 **Cautious Status:** High text-sending rates vs. low mutual return indicators point directly towards communication fading patterns."
-
+        advice = "💤 **The Fading Zone:** You are putting a lot of effort into sending texts, but the matching spark isn't keeping up. This usually means conversations start off strong but suddenly turn into silence. Try shaking up your profile or bio!"
     st.markdown("---")
-    st.markdown("### 📊 Interactive Visual Summary Dashboard")
+    st.markdown("### 📊 Visual Summary Dashboard")
 
-    # Layout for KPIs and visualizations
     dash_col1, dash_col2 = st.columns([1, 1.2])
 
     with dash_col1:
@@ -89,15 +96,15 @@ if st.button("🔮 Calculate Scores & Predict Destiny", use_container_width=True
         fig_gauge = go.Figure(go.Indicator(
             mode = "gauge+number",
             value = situationship_score,
-            title = {'text': "Calculated Situationship Risk Index"},
+            title = {'text': "Situationship Risk Index"},
             domain = {'x': [0, 1], 'y': [0, 1]},
             gauge = {
                 'axis': {'range': [0, 100]},
                 'bar': {'color': "#2c3e50"},
                 'steps': [
-                    {'range': [0, 38], 'color': "#2ecc71"},   # Safe / Mutual Match zone
-                    {'range': [38, 60], 'color': "#f1c40f"},  # Alert / Ghosted zone
-                    {'range': [60, 100], 'color': "#e74c3c"}  # High Risk / Catfish zone
+                    {'range': [0, 38], 'color': "#2ecc71"},   # Safe / Match
+                    {'range': [38, 60], 'color': "#f1c40f"},  # Warning / Ghosted
+                    {'range': [60, 100], 'color': "#e74c3c"}  # Dangerous / Catfish
                 ]
             }
         ))
