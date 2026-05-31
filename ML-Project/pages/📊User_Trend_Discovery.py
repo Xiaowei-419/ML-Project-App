@@ -7,7 +7,7 @@ st.set_page_config(page_title="Dating Trends Insights", page_icon="📊", layout
 # User-Friendly Header
 st.title("📊 Online Dating Trends & Insights")
 st.markdown("""
-Welcome to the Data Discovery Center! Here, we look at the real data patterns of thousands of app users. 
+Welcome to the Data Discovery Center! Here, we look at the real data patterns of about thousands of app users. 
 Use this page to see how daily habits like swiping and texting directly lead to matching up, 
 getting ghosted, or running into misleading profiles!
 """)
@@ -73,41 +73,75 @@ try:
 
     st.markdown("---")
 
-    # --- STEP 3: INTERACTIVE COMPARISON CHART (BAR CHART REPLACEMENT) ---
+    # --- STEP 3: INTERACTIVE COMPARISON CHART (DYNAMIC MULTI-FEATURE BAR CHART) ---
     if len(available_cols) >= 1:
-        st.markdown("### 🕵️‍♂️ Explore Behavior Averages Across Outcomes")
-        st.markdown("Select a dating habit. The bar chart will dynamically recalculate and show you the exact average score for each relationship outcome group.")
+        st.markdown("### 🎛️ Dynamic Behavioral Profile Builder")
+        st.markdown("Check or uncheck the features below to build your own custom comparison chart. This view uses normalization to drastically amplify the hidden differences between outcomes.")
 
-        # User-facing dynamic filter dropdown
-        chosen_habit_label = st.selectbox("Choose a dating habit to filter and analyze:", dropdown_labels, index=0)
-        real_habit = [k for k, v in friendly_names.items() if v == chosen_habit_label][0]
-
-        # Calculate the real mathematical mean grouped by Dating Outcome behind the scenes
-        df_grouped_bar = df.groupby('Dating Outcome')[real_habit].mean().reset_index()
-
-        # Build a clean, professional, and easily digestible Bar Chart
-        fig_bar = px.bar(
-            df_grouped_bar, 
-            x='Dating Outcome', 
-            y=real_habit, 
-            color='Dating Outcome',
-            title=f"Average '{chosen_habit_label}' for Each Dating Outcome Group",
-            color_discrete_map={
-                'Mutual Match 👩‍❤️‍👨': '#2ecc71', 
-                'Ghosted 👻': '#f1c40f', 
-                'Catfished 🕵️‍♂️': '#e74c3c'
-            },
-            text_auto='.2f' # Automatically displays the exact numeric average value cleanly on top of each bar
+        # Interactive Checklist Filter for Features
+        selected_labels = st.multiselect(
+            "Select which features you want to compare on the chart:",
+            options=dropdown_labels,
+            default=dropdown_labels[:4]  # Pre-selects the first 4 features by default
         )
 
-        fig_bar.update_layout(
-            xaxis_title="Dating Outcome Group",
-            yaxis_title=f"Average {chosen_habit_label}",
-            showlegend=False,
-            height=450
-        )
-        
-        st.plotly_chart(fig_bar, use_container_width=True)
+        if not selected_labels:
+            st.warning("⚠️ Please select at least one feature from the filter above to display the visual chart!")
+        else:
+            # Map selected friendly labels back to the real technical database column names
+            selected_real_cols = [k for k, v in friendly_names.items() if v in selected_labels]
+
+            # 1. Calculate the mean for the selected features grouped by Outcome
+            df_bar_raw = df.groupby('Dating Outcome')[selected_real_cols].mean().reset_index()
+
+            # 2. Apply Min-Max Scaling to blow up and amplify the visual differences
+            df_bar_scaled = df_bar_raw.copy()
+            for col in selected_real_cols:
+                col_min = df_bar_raw[col].min()
+                col_max = df_bar_raw[col].max()
+                if col_max != col_min:
+                    df_bar_scaled[col] = (df_bar_raw[col] - col_min) / (col_max - col_min)
+                else:
+                    df_bar_scaled[col] = 0.5
+
+            # 3. Melt the data frame into a clean structural format for Plotly Express
+            df_bar_melted = df_bar_scaled.melt(
+                id_vars='Dating Outcome', 
+                value_vars=selected_real_cols,
+                var_name='Habit Attribute', 
+                value_name='Relative Intensity'
+            )
+
+            # 4. Map back the technical column names to our clean, user-friendly labels
+            df_bar_melted['Habit Label'] = df_bar_melted['Habit Attribute'].map(friendly_names)
+
+            # 5. Build a grouped side-by-side Horizontal Bar Chart
+            fig_filtered_bar = px.bar(
+                df_bar_melted,
+                y='Habit Label',
+                x='Relative Intensity',
+                color='Dating Outcome',
+                barmode='group',  # Places the three outcome bars side-by-side for each feature
+                orientation='h',  # Horizontal orientation makes text labels incredibly easy to read
+                title="Amplified Contrast Analysis Across Selected Features",
+                color_discrete_map={
+                    'Mutual Match 👩‍❤️‍👨': '#2ecc71', 
+                    'Ghosted 👻': '#f1c40f', 
+                    'Catfished 🕵️‍♂️': '#e74c3c'
+                },
+                labels={'Relative Intensity': 'Relative Intensity (Min-Max Scaled Diff)'}
+            )
+
+            # Make the bars look highly professional and clear
+            fig_filtered_bar.update_layout(
+                yaxis_title="",
+                xaxis_title="Relative Scaling (Higher means group scores highest for this feature)",
+                height=150 + (len(selected_labels) * 80),  # Dynamically expands taller if user selects more features!
+                legend_title_text='Dating Outcome',
+                xaxis=dict(showticklabels=False)  # Hides numeric decimals since it represents relative scale
+            )
+
+            st.plotly_chart(fig_filtered_bar, use_container_width=True)
 
     st.markdown("---")
 
