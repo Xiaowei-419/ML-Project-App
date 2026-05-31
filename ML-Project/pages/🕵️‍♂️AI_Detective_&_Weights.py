@@ -102,13 +102,13 @@ with sim_col2:
     
     if score > 60:
         st.error("### 🕵️‍♂️ High Catfish & Bot Danger Zone!")
-        st.info("🚨 **What's happening here: ** When a profile spends hours on end rapidly swiping 'yes' on everyone, the algorithm flags this as machine-like behavior. Our data shows this hyperactive and unselective pattern is highly vulnerable to falling into fake profile traps, scam bots, and catfished.")
+        st.info("🚨 **What's happening here :** When a profile spends hours on end rapidly swiping 'yes' on everyone, the algorithm flags this as machine-like behavior. Our data shows this hyperactive and unselective pattern is highly vulnerable to falling into fake profile traps, scam bots, and catfished.")
     elif score < 38:
         st.success("### 👩‍❤️‍👨 Green Flags! Safe Track to a Mutual Match")
-        st.info("✨ **What's happening here: ** Low screen time mixed with selective swiping shows true intent. The data confirms this thoughtful approach yields the highest success rate for transforming into a meaningful real-life connection.")
+        st.info("✨ **What's happening here :** Low screen time mixed with selective swiping shows true intent. The data confirms this thoughtful approach yields the highest success rate for transforming into a meaningful real-life connection.")
     else:
         st.warning("### 👻 The Fading Loop (High Risk of Being Ghosted)")
-        st.info("💤 **What's happening here: ** This represents a casual and typical user pattern. While you are active enough to spark a conversation, the habits lack the momentum needed and most probably fizzle out into absolute silence.")
+        st.info("💤 **What's happening here :** This represents a casual and typical user pattern. While you are active enough to spark a conversation, the habits lack the momentum needed and most probably fizzle out into absolute silence.")
 
 st.markdown("---")
 
@@ -120,14 +120,14 @@ with col_t1:
     with st.container(border=True):
         st.markdown("### What Ruins Your Chances?")
         st.markdown("""
-        * **Mindless App Usage : ** Leaving the app open for hours treating it like an endless social media scrolling feed ruins your match algorithm placement.
-        * **Mystery Profiles : ** Leaving your bio empty flags you immediately as a low-effort profile or a potential spam bot.
+        * **Mindless App Usage :** Leaving the app open for hours treating it like an endless social media scrolling feed ruins your match algorithm placement.
+        * **Mystery Profiles :** Leaving your bio empty flags you immediately as a low-effort profile or a potential spam bot.
         """)
 
 with col_t2:
     with st.container(border=True):
         st.markdown("###  What Actually Works?")
         st.markdown("""
-        * **Quality Over Quantity : ** Being highly selective will match you with premium and active users.
-        * **Show Yourself : ** Upload more profile pictures to show your personalities. Providing natural conversation starters.
+        * **Quality Over Quantity :** Being highly selective will match you with premium and active users.
+        * **Show Yourself :** Upload more profile pictures to show your personalities. Providing natural conversation starters.
         """)
