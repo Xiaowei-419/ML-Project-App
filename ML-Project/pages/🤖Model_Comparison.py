@@ -17,7 +17,8 @@ Below is the master leaderboard showing how our trained models beat random chanc
 def get_model_metrics():
     # Exactly matching your notebook's Cell 19 Final Evaluation matrix
     data = {
-        "Dating AI Classifier Setup": [
+        # UPDATED: Changed the dictionary key to your preferred column name
+        "Machine Learning Model Trained": [
             "Logistic Regression (with Situationship Index)", 
             "Random Forest (Baseline)", 
             "SVM", 
@@ -43,9 +44,9 @@ st.dataframe(
 st.markdown("### 📊 Visualizing 5-Model Performance Bounds")
 fig_compare = px.bar(
     df_metrics, 
-    x="Machine Learning Model Trained", 
+    x="Machine Learning Model Trained", # Perfectly matches the data column name now!
     y="Testing Accuracy (%)", 
-    color="Machine Learning Model Trained",
+    color="Machine Learning Model Trained", # Perfectly matches the data column name now!
     text_auto='.2f',
     title="Testing Accuracy Metrics Across All 5 Trained Models",
     color_discrete_sequence=px.colors.qualitative.Pastel
@@ -55,6 +56,7 @@ fig_compare = px.bar(
 fig_compare.update_layout(
     yaxis_range=[30, 36], 
     yaxis_title="Accuracy Scale (%)",
+    xaxis_title="Trained Models",
     showlegend=False
 )
 st.plotly_chart(fig_compare, use_container_width=True)
