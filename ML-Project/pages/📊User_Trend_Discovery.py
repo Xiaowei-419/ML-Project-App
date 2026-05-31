@@ -44,7 +44,7 @@ try:
         'profile_pics_count': 'Profile Pictures Uploaded',
         'bio_length': 'Bio Characters Length',
         'emoji_usage_rate': 'Emoji Usage Rate',
-        'Situationship_Index': 'Situationship Risk Score'
+        'Situationship_Index': 'Situationship Index'
     }
     
     available_cols = [c for c in friendly_names.keys() if c in df.columns]
@@ -76,7 +76,7 @@ try:
     # --- STEP 3: INTERACTIVE COMPARISON CHART (DYNAMIC MULTI-FEATURE BAR CHART) ---
     if len(available_cols) >= 1:
         st.markdown("### 🎛️ Dynamic Behavioral Profile Builder")
-        st.markdown("Check or uncheck the features below to build your own custom comparison chart. This view uses normalization to drastically amplify the hidden differences between outcomes.")
+        st.markdown("Filter the features below to build your own custom comparison chart. This view uses normalization to drastically amplify the hidden differences between outcomes.")
 
         # Interactive Checklist Filter for Features
         selected_labels = st.multiselect(
@@ -142,6 +142,67 @@ try:
             )
 
             st.plotly_chart(fig_filtered_bar, use_container_width=True)
+
+    st.markdown("---")
+
+    # --- STEP 3: INTERACTIVE COMPARISON CHART (RADAR BEHAVIORAL PROFILE) ---
+    if len(available_cols) >= 3:
+        st.markdown("### 🕸️ Algorithmic Behavioral Fingerprints")
+        st.markdown("This holistic view visualizes how all user habits combine simultaneously. By normalizing the attributes, we expose the unmistakable geometric 'fingerprint' unique to each dating destiny.")
+
+        # 1. Group by outcome and calculate the mean for all numerical available columns
+        df_radar_raw = df.groupby('Dating Outcome')[available_cols].mean().reset_index()
+
+        # 2. Apply Min-Max Scaling on the averages to drastically amplify hidden visual differences
+        df_radar_scaled = df_radar_raw.copy()
+        for col in available_cols:
+            col_min = df_radar_raw[col].min()
+            col_max = df_radar_raw[col].max()
+            # Prevent Division by Zero if max equals min
+            if col_max != col_min:
+                df_radar_scaled[col] = (df_radar_raw[col] - col_min) / (col_max - col_min)
+            else:
+                df_radar_scaled[col] = 0.5
+
+        # 3. Melt the data frame so it fits Plotly Express's expected structural format
+        df_radar_melted = df_radar_scaled.melt(
+            id_vars='Dating Outcome', 
+            value_vars=available_cols,
+            var_name='Habit Attribute', 
+            value_name='Relative Intensity'
+        )
+
+        # 4. Map back the technical column names to our clean, user-friendly labels
+        df_radar_melted['Habit Label'] = df_radar_melted['Habit Attribute'].map(friendly_names)
+
+        # 5. Build the elegant, highly contrastive Radar Map
+        fig_radar = px.line_polar(
+            df_radar_melted, 
+            r='Relative Intensity', 
+            theta='Habit Label', 
+            color='Dating Outcome',
+            line_close=True,
+            title="How the Machine Learning Model Separates Class Profiles",
+            color_discrete_map={
+                'Mutual Match 👩‍❤️‍👨': '#2ecc71', 
+                'Ghosted 👻': '#f1c40f', 
+                'Catfished 🕵️‍♂️': '#e74c3c'
+            },
+            template="plotly_white"
+        )
+
+        # 6. Fill the inside areas of the lines with semi-transparent colors to make overlapping segments obvious
+        fig_radar.update_traces(fill='horizontal')
+
+        fig_radar.update_layout(
+            polar=dict(
+                radialaxis=dict(visible=True, range=[0, 1], showticklabels=False)
+            ),
+            showlegend=True,
+            height=500
+        )
+        
+        st.plotly_chart(fig_radar, use_container_width=True)
 
     st.markdown("---")
 
