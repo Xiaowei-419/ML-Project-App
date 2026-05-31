@@ -33,15 +33,15 @@ with col_link2:
 st.markdown("---")
 st.markdown("### 👥 Our Team")
 
-# Everything inside a single block to guarantee perfect baseline alignment
+# Minimalist vertical list with stacked details
 st.markdown("""
-&nbsp;&nbsp;**Chua Bi Yun** &nbsp;&nbsp;|&nbsp;&nbsp; :gray[Data Architect] &nbsp;&nbsp;|&nbsp;&nbsp; `25005610`  
+* **Chua Bi Yun** :gray[Data Architect] &nbsp;|&nbsp; `25005610`  
 
-&nbsp;&nbsp;**Phong Xiao Wei** &nbsp;&nbsp;|&nbsp;&nbsp; :gray[Algorithm Specialist] &nbsp;&nbsp;|&nbsp;&nbsp; `25005900`  
+* **Phong Xiao Wei** :gray[Algorithm Specialist] &nbsp;|&nbsp; `25005900`  
 
-&nbsp;&nbsp;**Joyce Wong Tze Eng** &nbsp;&nbsp;|&nbsp;&nbsp; :gray[ML Engineer] &nbsp;&nbsp;|&nbsp;&nbsp; `25005859`  
+* **Joyce Wong Tze Eng** :gray[ML Engineer] &nbsp;|&nbsp; `25005859`  
 
-&nbsp;&nbsp;**Choo Kah Lok** &nbsp;&nbsp;|&nbsp;&nbsp; :gray[ML Engineer] &nbsp;&nbsp;|&nbsp;&nbsp; `25005750`  
+* **Choo Kah Lok** :gray[ML Engineer] &nbsp;|&nbsp; `25005750`  
 
-&nbsp;&nbsp;**Chai Xin Tong** &nbsp;&nbsp;|&nbsp;&nbsp; :gray[Visual Analyst] &nbsp;&nbsp;|&nbsp;&nbsp; `25005524`  
+* **Chai Xin Tong** :gray[Visual Analyst] &nbsp;|&nbsp; `25005524`  
 """)
