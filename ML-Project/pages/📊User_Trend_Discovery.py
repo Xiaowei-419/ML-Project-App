@@ -76,7 +76,7 @@ try:
     # --- STEP 3: INTERACTIVE COMPARISON CHART (DYNAMIC MULTI-FEATURE BAR CHART) ---
     if len(available_cols) >= 1:
         st.markdown("### 🎛️ Dynamic Behavioral Profile Builder")
-        st.markdown("Filter the features below to build your own custom comparison chart. This view uses normalization to drastically amplify the hidden differences between outcomes.")
+        st.markdown("Let's build your own custom comparison chart !")
 
         # Interactive Checklist Filter for Features
         selected_labels = st.multiselect(
@@ -123,7 +123,7 @@ try:
                 color='Dating Outcome',
                 barmode='group',  
                 orientation='h',  
-                title="Amplified Contrast Analysis Across Selected Features",
+                title="Comparison of Habits by Outcome",
                 color_discrete_map={
                     'Mutual Match 👩‍❤️‍👨': '#2ecc71', 
                     'Ghosted 👻': '#f1c40f', 
@@ -135,7 +135,7 @@ try:
             # Make the bars look highly professional and clear
             fig_filtered_bar.update_layout(
                 yaxis_title="",
-                xaxis_title="Relative Scaling (Higher means group scores highest for this feature)",
+                xaxis_title="The longer the bar, the higher that specific group scores for that habit",
                 height=150 + (len(selected_labels) * 80),  
                 legend_title_text='Dating Outcome',
                 xaxis=dict(showticklabels=False)  
@@ -147,7 +147,7 @@ try:
 
     # --- STEP 3.5: INTERACTIVE COMPARISON CHART (RADAR BEHAVIORAL PROFILE) ---
     if len(available_cols) >= 3:
-        st.markdown("### 🕸️ Algorithmic Behavioral Fingerprints")
+        st.markdown("### 🕸️ Summary for User Behavior Profiles")
         st.markdown("This holistic view visualizes how all user habits combine simultaneously. By normalizing the attributes, we expose the unmistakable geometric 'fingerprint' unique to each dating destiny.")
 
         # 1. Group by outcome and calculate the mean for all numerical available columns
@@ -205,21 +205,21 @@ try:
 
         # --- NEW PLAIN-ENGLISH RADAR EXPLANATION BOX ---
         st.info("""
-        💡 **How to read this web graph:**
+        💡 **What this Web Graph means?**
         
-        Instead of looking at exact statistics, this chart tracks **territory and shapes**. The further a color spikes out toward an edge, the higher that group scores for that habit. 
+        The further a color spikes out towards an edge, the higher that group scores for that habit. 
         
-        * 🟩 **The Mutual Match Shape (Top & Right Side):** Notice how the green area balloons toward **Daily App Usage**, **Messages Sent**, and **Profile Pics**. This means successful matches come from highly active, talkative, and visually complete profiles.
-        * 🟥 **The Catfished Shape (Left Side):** The red territory punches aggressively out toward the **Situationship Index** and **Emoji Usage**, but completely shrinks away from bio lengths. This is a classic bot or scam signature.
-        * 🟨 **The Ghosted Shape (Bottom Spike):** The yellow area stretches directly down toward **Bio Characters Length**. This reveals that ghosted users put high effort into writing massive biographies, but score too low on daily app presence to keep the spark alive.
+        * 🟩 **Mutual Match (Top & Right Side):** The green area grows towards **Daily App Usage**, **Messages Sent**, and **Profile Pics**. This means successful matches come from highly active, talkative, and visually complete profiles.
+        * 🟥 **Catfished (Left Side):** The red area grows aggressively out towards the **Situationship Index** and **Emoji Usage**, but completely moves away from bio lengths. This is a classic bot or scam signature.
+        * 🟨 **Ghosted (Bottom Spike):** The yellow area grows directly down towards **Bio Characters Length**. This reveals that ghosted users put high effort into writing massive biographies, but score too low on daily app presence to keep the spark alive.
         """)
 
     st.markdown("---")
 
     # --- STEP 4: PIE CHART BREAKDOWN ---
     if 'Dating Outcome' in df.columns:
-        st.markdown("### 🗺️ The Ultimate Outcome Breakdown")
-        st.markdown("What percentage of users actually land a real match versus falling into dating traps?")
+        st.markdown("### 🗺️ Ultimate Outcome Breakdown")
+        st.markdown("What percentage of users actually get a perfect match versus falling into dating traps?")
         
         fig_pie = px.pie(
             df, 
@@ -235,7 +235,7 @@ try:
     # --- STEP 5: CLEAN DATA SHEET LOOKER ---
     st.markdown("---")
     with st.expander("🔍 Click here to view a sample of the raw spreadsheet data"):
-        st.markdown("This is a preview of the clean, raw data table powering this dashboard:")
+        st.markdown("This is a preview of the clean, raw data table powering this page:")
         display_features = [c for c in available_cols]
         if 'Dating Outcome' in df.columns:
             display_features.append('Dating Outcome')
