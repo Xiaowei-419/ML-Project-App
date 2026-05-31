@@ -7,7 +7,7 @@ st.title("🤖 Model Comparison & Benchmark Analytics")
 
 st.markdown("""
 To predict whether an online interaction profile leads to a **Ghosted**, **Mutual Match**, or **Catfished** outcome, 
-we built, trained, and cross-validated **5 distinct Machine Learning classifiers**.
+we have built, trained, and cross-validated **5 distinct Machine Learning classifiers**.
 
 Since the dataset splits evenly into 3 target classes, a random blind guess only scores **33.33%**. 
 Below is the master leaderboard showing how our trained models beat random chance!
@@ -18,7 +18,7 @@ def get_model_metrics():
     # Exactly matching your notebook's Cell 19 Final Evaluation matrix
     data = {
         "Dating AI Classifier Setup": [
-            "Logistic Regression (w/ Index)", 
+            "Logistic Regression (with Situationship Index)", 
             "Random Forest (Baseline)", 
             "SVM", 
             "Gradient Boosting", 
@@ -43,11 +43,11 @@ st.dataframe(
 st.markdown("### 📊 Visualizing 5-Model Performance Bounds")
 fig_compare = px.bar(
     df_metrics, 
-    x="Dating AI Classifier Setup", 
+    x="Machine Learning Model Trained", 
     y="Testing Accuracy (%)", 
-    color="Dating AI Classifier Setup",
+    color="Machine Learning Model Trained",
     text_auto='.2f',
-    title="Testing Accuracy Metrics Across All 5 Trained Classifiers",
+    title="Testing Accuracy Metrics Across All 5 Trained Models",
     color_discrete_sequence=px.colors.qualitative.Pastel
 )
 
@@ -62,7 +62,7 @@ st.plotly_chart(fig_compare, use_container_width=True)
 # Project Context Analysis (Updated to align precisely with your data facts)
 st.success(
     "💡 **What do these results actually mean?** \n\n"
-    "1. **The Winner:** **Logistic Regression (w/ Index)** came out on top! It correctly predicted dating outcomes **33.96%** of the time on unseen test data, proving that our engineered custom score helps regularized classification maps filter signals from complicated features.\n\n"
-    "2. **The Most Steady:** **Random Forest (Baseline)** emerged as the most structurally robust and steady performer across validation pools. It produced the tightest standard deviation variance (**0.0033**), making its decision paths highly resilient across data splits.\n\n"
+    "1. **The Winner:** **Logistic Regression (with Situationship Index)** came out on top! It predicts dating outcomes **33.96%** of the time on unseen test data, proving that our custom situationship index helps regularized classification maps filter signals from complicated features.\n\n"
+    "2. **The Most Steady:** **Random Forest** as the most steady performer across validation pools. It produced the tightest standard deviation variance (**0.0033**), making its decision paths highly resilient across data splits.\n\n"
     "3. **The Reality Check:** You might notice all the scores look quite compact (around 32% to 34%). That is entirely normal! Blindly guessing between 3 options yields a baseline of 33.33%. Human romance and online dating are incredibly random and unpredictable, even advanced algorithms have a tough time finding a perfect formula for love!"
 )
