@@ -33,24 +33,18 @@ with col_link2:
 st.markdown("---")
 st.markdown("### 👥 Our Team")
 
-col_t1, col_t2, col_t3, col_t4, col_t5 = st.columns(5)
+# Create a beautifully aligned, minimalist list using 2 clean columns
+col_left, col_right = st.columns([1, 2])
 
-with col_t1:
-    st.markdown("##### **Chua Bi Yun**")
-    st.caption("25005610\n\nData Architect")
+with col_left:
+    st.markdown("""
+    **Chua Bi Yun** **Phong Xiao Wei** **Joyce Wong Tze Eng** **Choo Kah Lok** **Chai Xin Tong** """)
 
-with col_t2:
-    st.markdown("##### **Phong Xiao Wei**")
-    st.caption("25005900\n\nAlgorithm Specialist")
-
-with col_t3:
-    st.markdown("##### **Joyce Wong Tze Eng**")
-    st.caption("25005859\n\nML Engineer")
-
-with col_t4:
-    st.markdown("##### **Choo Kah Lok**")
-    st.caption("25005750\n\nML Engineer")
-
-with col_t5:
-    st.markdown("##### **Chai Xin Tong**")
-    st.caption("25005524\n\nVisual Analyst")
+with col_right:
+    st.markdown("""
+    :gray[Data Architect] &nbsp;|&nbsp; `25005610`  
+    :gray[Algorithm Specialist] &nbsp;|&nbsp; `25005900`  
+    :gray[ML Engineer] &nbsp;|&nbsp; `25005859`  
+    :gray[ML Engineer] &nbsp;|&nbsp; `25005750`  
+    :gray[Visual Analyst] &nbsp;|&nbsp; `25005524`  
+    """)
