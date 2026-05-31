@@ -39,19 +39,19 @@ row1_col1, row1_col2, row1_col3 = st.columns(3)
 with row1_col1:
     st.markdown("#### Chua Bi Yun")
     st.caption("*Data Architect*")
-    st.code("25005610", language="text")
+    st.text("25005610")
 
 with row1_col2:
     st.markdown("#### Phong Xiao Wei")
     st.caption("*Algorithm Specialist*")
-    st.code("25005900", language="text")
+    st.text("25005900")
 
 with row1_col3:
     st.markdown("#### Joyce Wong Tze Eng")
     st.caption("*ML Engineer*")
-    st.code("25005859", language="text")
+    st.text("25005859")
 
-st.markdown("<br>", unsafe_allow_html=True) # Adds elegant structural vertical spacing between card layers
+st.markdown("<br>", unsafe_allow_html=True) # Elegant vertical spacing between row layers
 
 # Bottom Row: 3 Columns
 row2_col1, row2_col2, row2_col3 = st.columns(3)
@@ -59,13 +59,13 @@ row2_col1, row2_col2, row2_col3 = st.columns(3)
 with row2_col1:
     st.markdown("#### Choo Kah Lok")
     st.caption("*ML Engineer*")
-    st.code("25005750", language="text")
+    st.text("25005750")
 
 with row2_col2:
     st.markdown("#### Chai Xin Tong")
     st.caption("*Visual Analyst*")
-    st.code("25005524", language="text")
+    st.text("25005524")
 
 with row2_col3:
-    # Keeps alignment empty & pristine if you have a 5-member configuration group
+    # Keeps alignment empty & pristine for a 5-member configuration group
     st.write("")
