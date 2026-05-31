@@ -58,7 +58,8 @@ fig_importance = px.bar(
     title="Which Habits Drag You into a Situationship vs. Protect You"
 )
 
-fig_importance.update_layout(showlegend=True, height=380, yaxis_autorange="reverse")
+# FIXED: Changed "reverse" to "reversed" so Plotly can process the sorting direction cleanly
+fig_importance.update_layout(showlegend=True, height=380, yaxis_autorange="reversed")
 st.plotly_chart(fig_importance, use_container_width=True)
 
 st.markdown("---")
