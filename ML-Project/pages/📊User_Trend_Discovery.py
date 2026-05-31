@@ -203,6 +203,17 @@ try:
         
         st.plotly_chart(fig_radar, use_container_width=True)
 
+        # --- NEW PLAIN-ENGLISH RADAR EXPLANATION BOX ---
+        st.info("""
+        💡 **How to read this web graph:**
+        
+        Instead of looking at exact statistics, this chart tracks **territory and shapes**. The further a color spikes out toward an edge, the higher that group scores for that habit. 
+        
+        * 🟩 **The Mutual Match Shape (Top & Right Side):** Notice how the green area balloons toward **Daily App Usage**, **Messages Sent**, and **Profile Pics**. This means successful matches come from highly active, talkative, and visually complete profiles.
+        * 🟥 **The Catfished Shape (Left Side):** The red territory punches aggressively out toward the **Situationship Index** and **Emoji Usage**, but completely shrinks away from bio lengths. This is a classic bot or scam signature.
+        * 🟨 **The Ghosted Shape (Bottom Spike):** The yellow area stretches directly down toward **Bio Characters Length**. This reveals that ghosted users put high effort into writing massive biographies, but score too low on daily app presence to keep the spark alive.
+        """)
+
     st.markdown("---")
 
     # --- STEP 4: PIE CHART BREAKDOWN ---
@@ -220,55 +231,6 @@ try:
         st.plotly_chart(fig_pie, use_container_width=True)
     
     st.markdown("---")
-
-    # --- STEP 4.5: BEHAVIORAL TIER DISTRIBUTION BREAKDOWN ---
-    if 'Dating Outcome' in df.columns and len(available_cols) >= 1:
-        st.markdown("### 📊 Behavioral Tier Distribution Analysis")
-        st.markdown("See the shifting ratio of relationship outcomes across different operational levels of user engagement.")
-
-        tier_habit_label = st.selectbox("Select a habit to group into behavioral tiers:", dropdown_labels, index=min(1, len(dropdown_labels)-1), key="tier_choice")
-        real_tier_habit = [k for k, v in friendly_names.items() if v == tier_habit_label][0]
-
-        df_tier = df[[real_tier_habit, 'Dating Outcome']].copy()
-
-        try:
-            df_tier['Activity Tier'] = pd.qcut(
-                df_tier[real_tier_habit], 
-                q=3, 
-                labels=["Low Level Focus", "Moderate Level Focus", "High Level Focus"],
-                duplicates='drop'
-            )
-        except Exception:
-            df_tier['Activity Tier'] = pd.cut(
-                df_tier[real_tier_habit], 
-                bins=3, 
-                labels=["Low Level Focus", "Moderate Level Focus", "High Level Focus"]
-            )
-
-        df_counts = df_tier.groupby(['Activity Tier', 'Dating Outcome'], observed=False).size().reset_index(name='Total Users')
-
-        fig_stacked = px.bar(
-            df_counts,
-            x="Activity Tier",
-            y="Total Users",
-            color="Dating Outcome",
-            title=f"Ratio Breakdown of Outcomes Based on '{tier_habit_label}' Tiers",
-            color_discrete_map={
-                'Mutual Match 👩‍❤️‍👨': '#2ecc71', 
-                'Ghosted 👻': '#f1c40f', 
-                'Catfished 🕵️‍♂️': '#e74c3c'
-            },
-            barmode="stack" 
-        )
-
-        fig_stacked.update_layout(
-            barnorm="percent",
-            yaxis_title="Percentage Share (%)",
-            xaxis_title="Engineered Activity Thresholds",
-            height=450
-        )
-
-        st.plotly_chart(fig_stacked, use_container_width=True)
 
     # --- STEP 5: CLEAN DATA SHEET LOOKER ---
     st.markdown("---")
