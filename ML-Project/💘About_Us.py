@@ -7,8 +7,8 @@ st.set_page_config(
 )
 
 # Title & Intro
-st.title("Decoding the Situationship: Predicting Dating App Destinies with the Situationship Index")
-st.subheader("Machine Learning Project (WIA1006)")
+st.title("Decoding Situationship: Predicting Dating App Destinies with Situationship Index")
+st.subheader("Machine Learning Group Project (WIA1006)")
 
 st.markdown("""
 ### 📖 Project Overview
@@ -16,7 +16,7 @@ In this era, modern relationships highly depend on digital interactions.
 This application uses Machine Learning Models to translate behaviors such as app usage patterns, messaging habits, 
 and swipe behaviors into predictable relationship trajectories.
 
-By examining interaction signals, we explore phenomena such as **Ghosting**, **Catfishing**, and **Mutual Matches**, 
+By examining interaction signals, we explored phenomena such as **Ghosting**, **Catfishing**, and **Mutual Matches**, 
 giving a structural shape to the ambiguous concept of a **'Situationship'**.
 """)
 
@@ -31,25 +31,26 @@ with col_link2:
 
 # Team Members section
 st.markdown("---")
-st.markdown("### 👥 Meet Our Team")
+st.markdown("### 👥 Our Team")
 
-# Straightforward row-by-row layout
-with st.container(border=True):
-    st.markdown("### 👤 Chua Bi Yun")
-    st.markdown("**Role:** Data Architect  |  **Matric No:** 25005610")
+col_t1, col_t2, col_t3, col_t4, col_t5 = st.columns(5)
 
-with st.container(border=True):
-    st.markdown("### 👤 Phong Xiao Wei")
-    st.markdown("**Role:** Algorithm Specialist  |  **Matric No:** 25005900")
+with col_t1:
+    st.markdown("##### **Chua Bi Yun**")
+    st.caption("25005610\n\nData Architect")
 
-with st.container(border=True):
-    st.markdown("### 👤 Joyce Wong Tze Eng")
-    st.markdown("**Role:** ML Engineer  |  **Matric No:** 25005859")
+with col_t2:
+    st.markdown("##### **Phong Xiao Wei**")
+    st.caption("25005900\n\nAlgorithm Specialist")
 
-with st.container(border=True):
-    st.markdown("### 👤 Choo Kah Lok")
-    st.markdown("**Role:** ML Engineer  |  **Matric No:** 25005750")
+with col_t3:
+    st.markdown("##### **Joyce Wong Tze Eng**")
+    st.caption("25005859\n\nML Engineer")
 
-with st.container(border=True):
-    st.markdown("### 👤 Chai Xin Tong")
-    st.markdown("**Role:** Visual Analyst  |  **Matric No:** 25005524")
+with col_t4:
+    st.markdown("##### **Choo Kah Lok**")
+    st.caption("25005750\n\nML Engineer")
+
+with col_t5:
+    st.markdown("##### **Chai Xin Tong**")
+    st.caption("25005524\n\nVisual Analyst")
