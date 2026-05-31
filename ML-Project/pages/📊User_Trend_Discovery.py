@@ -121,8 +121,8 @@ try:
                 y='Habit Label',
                 x='Relative Intensity',
                 color='Dating Outcome',
-                barmode='group',  # Places the three outcome bars side-by-side for each feature
-                orientation='h',  # Horizontal orientation makes text labels incredibly easy to read
+                barmode='group',  
+                orientation='h',  
                 title="Amplified Contrast Analysis Across Selected Features",
                 color_discrete_map={
                     'Mutual Match 👩‍❤️‍👨': '#2ecc71', 
@@ -136,16 +136,16 @@ try:
             fig_filtered_bar.update_layout(
                 yaxis_title="",
                 xaxis_title="Relative Scaling (Higher means group scores highest for this feature)",
-                height=150 + (len(selected_labels) * 80),  # Dynamically expands taller if user selects more features!
+                height=150 + (len(selected_labels) * 80),  
                 legend_title_text='Dating Outcome',
-                xaxis=dict(showticklabels=False)  # Hides numeric decimals since it represents relative scale
+                xaxis=dict(showticklabels=False)  
             )
 
             st.plotly_chart(fig_filtered_bar, use_container_width=True)
 
     st.markdown("---")
 
-    # --- STEP 3: INTERACTIVE COMPARISON CHART (RADAR BEHAVIORAL PROFILE) ---
+    # --- STEP 3.5: INTERACTIVE COMPARISON CHART (RADAR BEHAVIORAL PROFILE) ---
     if len(available_cols) >= 3:
         st.markdown("### 🕸️ Algorithmic Behavioral Fingerprints")
         st.markdown("This holistic view visualizes how all user habits combine simultaneously. By normalizing the attributes, we expose the unmistakable geometric 'fingerprint' unique to each dating destiny.")
@@ -158,7 +158,6 @@ try:
         for col in available_cols:
             col_min = df_radar_raw[col].min()
             col_max = df_radar_raw[col].max()
-            # Prevent Division by Zero if max equals min
             if col_max != col_min:
                 df_radar_scaled[col] = (df_radar_raw[col] - col_min) / (col_max - col_min)
             else:
@@ -191,8 +190,8 @@ try:
             template="plotly_white"
         )
 
-        # 6. Fill the inside areas of the lines with semi-transparent colors to make overlapping segments obvious
-        fig_radar.update_traces(fill='horizontal')
+        # 6. FIXED: Fill inside area using standard polar coordinate parameters
+        fig_radar.update_traces(fill='toself')
 
         fig_radar.update_layout(
             polar=dict(
